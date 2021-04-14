@@ -6,11 +6,14 @@
 <template>
   <div>
     {{age}}
+    {{content.data}}
+    <br>
+    <input type="text" v-model="content.data">
   </div>
 </template>
 
 <script>
-  import {reactive, toRefs, watchEffect, watch} from 'vue'
+  import {reactive, toRefs, watchEffect, watch, inject} from 'vue'
 
   export default {
     name: "Search",
@@ -24,13 +27,14 @@
       })
       watch(test, () => {
         console.log(test.age, '=watch===')
-
       })
+      let content = inject('content')
       setInterval(() => {
         test.age++
       }, 1000)
       return {
         ...toRefs(test),
+        content
       }
 
     }

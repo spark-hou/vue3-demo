@@ -11,16 +11,21 @@
     <input type="text" v-model="name"/>
   </div>
   <hr>
+  <br>
+  {{content.data}}
+  <br>
+  <input v-focus type="text" v-model="content.data">
   <Search></Search>
 </template>
 
 <script>
   import HelloWorld from './components/HelloWorld.vue'
   import Search from './components/Search.vue'
-  import {ref, reactive, toRefs, computed} from "vue"
+  import {ref, reactive, toRefs, computed, provide} from "vue"
 
   export default {
     name: 'App',
+
     components: {
       HelloWorld, Search
     },
@@ -30,8 +35,12 @@
       let userCom = computed(() => {
         return userInfo.name + 'hahah'
       })
+      let content = reactive({
+        data: '1212'
+      })
+      provide('content', content)
       return {
-        title, userInfo, ...toRefs(userInfo), userCom
+        title, userInfo, ...toRefs(userInfo), userCom, content
       }
 
     },
